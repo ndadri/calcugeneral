@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Raíces</title>
+</head>
+
+<body>
+    <h2>Calculadora de Raíces de una Ecuación Cuadrática</h2>
+    <form id="quadraticForm">
+        <label for="a">Coeficiente a:</label>
+        <input type="number" id="a" name="a" required>
+        <br>
+        <label for="b">Coeficiente b:</label>
+        <input type="number" id="b" name="b" required>
+        <br>
+        <label for="c">Coeficiente c:</label>
+        <input type="number" id="c" name="c" required>
+        <br><br>
+        <button type="submit">Calcular Raíces</button>
+    </form>
+    <p id="result"></p>
+
+    <script>
+        document.getElementById('quadraticForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const a = parseFloat(document.getElementById('a').value);
+            const b = parseFloat(document.getElementById('b').value);
+            const c = parseFloat(document.getElementById('c').value);
+
+            const discriminante = b * b - 4 * a * c;
+
+            let resultado = '';
+
+            if (discriminante > 0) {
+                const raiz1 = (-b + Math.sqrt(discriminante)) / (2 * a);
+                const raiz2 = (-b - Math.sqrt(discriminante)) / (2 * a);
+                resultado = `Las raíces son reales y diferentes: x1 = ${raiz1}, x2 = ${raiz2}`;
+            } else if (discriminante === 0) {
+                const raiz = -b / (2 * a);
+                resultado = `La raíz es real y doble: x = ${raiz}`;
+            } else {
+                const parteReal = -b / (2 * a);
+                const parteImaginaria = Math.sqrt(-discriminante) / (2 * a);
+                resultado = `Las raíces son complejas: x1 = ${parteReal} + ${parteImaginaria}i, x2 = ${parteReal} - ${parteImaginaria}i`;
+            }
+            document.getElementById('result').textContent = resultado;
+        });
+    </script>
+</body>
+
+</html>
